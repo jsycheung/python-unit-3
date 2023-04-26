@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block body %}
+    <h2>{{melon.common_name}}</h2>
+    <img class="melon-image" src="{{melon.image_url}}">
+    <h5>Price: {{melon.price_str()}}</h5>
+    <h4>Color: {{melon.color}}</h4>
+    {% if melon.seedless == "True" %}
+        <h4>Seedless</h4>
+    {% else %}
+        <h4>Warning: This melon has seeds!</h4>
+    {% endif %}
+    <form method="POST" action="/melon/{{ melon.melon_id }}">
+        <div>{{ form.quantity.label }}: {{ form.quantity }}</div>
+        {{ form.csrf_token }}
+        <button class="btn btn-primary" type="submit">Add to cart</button>
+    </form>
+{% endblock %}
